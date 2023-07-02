@@ -75,23 +75,30 @@ class _Data_CategoriesState extends State<Data_Categories> {
                     future: FetchData(),
                     builder: (context, snapshot) {
                       return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 15,
-                              crossAxisSpacing: 15),
+                        padding: const EdgeInsets.all(10),
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.categories.length,
                           itemBuilder: (context, index) {
-                            return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                      image: NetworkImage(snapshot.data!
-                                          .categories[index].image.src),
-                                      fit: BoxFit.fill),
-                                ));
+                            return Column(
+                              children: [
+                                snapshot.data!.categories[index].parentCategoryId == 0
+                                    ? Container(
+                                  height: 300,
+                                  width:300,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    image: DecorationImage(
+                                        image: NetworkImage(snapshot
+                                            .data!.categories[index].image.src),
+                                        fit: BoxFit.cover),
+                                  ),
+                                )
+                                    : Text(" "),
+                                     Text("m,ckz "),
+                              ],
+                            );
                           },
-                        ),
+                        )
                       );
                     },
                   ),
